@@ -4,9 +4,11 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
 
+  const API = 'http://YOUR_EC2_PUBLIC_IP:5000';
+
   // Load messages
   const fetchMessages = () => {
-    fetch('/api/messages')
+    fetch(`${API}/api/messages`)
       .then(res => res.json())
       .then(data => setMessages(data))
       .catch(err => console.log(err));
@@ -20,7 +22,7 @@ function App() {
   const addMessage = async () => {
     if (!text.trim()) return;
 
-    await fetch('/api/message', {
+    await fetch(`${API}/api/message`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
